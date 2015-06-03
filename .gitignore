@@ -1,0 +1,9 @@
+.settings
+.project
+.cproject
+.idea
+Debug
+Release
+tmp
+*~
+build
