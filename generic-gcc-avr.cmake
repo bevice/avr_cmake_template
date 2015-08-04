@@ -36,6 +36,8 @@ option(CXX_NO_THREAD_SAFE_STATICS "Don't use fread save statics in C++" ON)
 
 SET(CMAKE_SYSTEM_NAME Generic)
 SET(CMAKE_SYSTEM_PROCESSOR avr)
+set(CMAKE_C_COMPILER_WORKS 1)
+set(CMAKE_CXX_COMPILER_WORKS 1)
 SET(CMAKE_CROSSCOMPILING 1)
 ##########################################################################
 # executables in use
