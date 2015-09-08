@@ -437,12 +437,7 @@ add_definitions("-ffunction-sections")
 add_definitions("-c")
 
 set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -std=c11)
-message("FLAGS: '${CMAKE_C_FLAGS}'" )
 if(CXX_NO_THREAD_SAFE_STATICS)
     set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -fno-threadsafe-statics)
 endif(CXX_NO_THREAD_SAFE_STATICS)
 
-#
-#SET(CMAKE_C_COMPILER   avr-gcc )
-#SET(CMAKE_CXX_COMPILER avr-g++ )
-#SET(CMAKE_LINKER       avr-ld  )
