@@ -50,7 +50,7 @@ file(GLOB_RECURSE SRC_HEADERS ${PROJECT_SOURCE_DIR}/src/*.h)
 ##################################################################################
 add_avr_executable(
    ${PROJECT_NAME}
-   ${SRC_C_FILES} ${SRC_CXX_FILES} ${HEADERS}
+   ${SRC_C_FILES} ${SRC_CXX_FILES} ${SRC_HEADERS}
 )
 
 find_library(C_LIB c)
