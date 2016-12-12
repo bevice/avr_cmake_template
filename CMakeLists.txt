@@ -29,6 +29,9 @@ set(AVR_L_FUSE 0xFF)
 set(AVR_EX_FUSE 0×05)
 set(MCU_SPEED "16000000UL")
 
+### printf support
+#set(EXTRA_FLAGS "-Wl,-u,vfprintf -lprintf_min") 
+
 ### END TOOLCHAIN SETUP AREA #############################################
 INCLUDE(generic-gcc-avr.cmake)
 

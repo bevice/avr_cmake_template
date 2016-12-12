@@ -160,6 +160,7 @@ function(add_avr_executable EXECUTABLE_NAME)
    # set file names
    set(elf_file ${EXECUTABLE_NAME}${MCU_TYPE_FOR_FILENAME}.elf)
    set(hex_file ${EXECUTABLE_NAME}${MCU_TYPE_FOR_FILENAME}.hex)
+   set(bin_file ${EXECUTABLE_NAME}${MCU_TYPE_FOR_FILENAME}.bin)
    set(map_file ${EXECUTABLE_NAME}${MCU_TYPE_FOR_FILENAME}.map)
    set(eeprom_image ${EXECUTABLE_NAME}${MCU_TYPE_FOR_FILENAME}-eeprom.hex)
 
@@ -170,7 +171,7 @@ function(add_avr_executable EXECUTABLE_NAME)
       ${elf_file}
       PROPERTIES
          COMPILE_FLAGS "-mmcu=${AVR_MCU}"
-         LINK_FLAGS "-mmcu=${AVR_MCU} -Wl,--gc-sections -mrelax -Wl,-Map,${map_file}"
+         LINK_FLAGS "-mmcu=${AVR_MCU} -Wl,--gc-sections -mrelax -Wl,-Map,${map_file} ${EXTRA_FLAGS}"
    )
 
    add_custom_command(
@@ -180,6 +181,15 @@ function(add_avr_executable EXECUTABLE_NAME)
       COMMAND
          ${AVR_SIZE_TOOL} ${AVR_SIZE_ARGS} ${elf_file}
       DEPENDS ${elf_file}
+   )
+
+   add_custom_command(
+           OUTPUT ${bin_file}
+           COMMAND
+           ${AVR_OBJCOPY} -j .text -j .data -O binary ${elf_file} ${bin_file}
+           COMMAND
+           ${AVR_SIZE_TOOL} ${AVR_SIZE_ARGS} ${elf_file}
+           DEPENDS ${elf_file}
    )
 
    # eeprom
@@ -195,7 +205,7 @@ function(add_avr_executable EXECUTABLE_NAME)
    add_custom_target(
       ${EXECUTABLE_NAME}
       ALL
-      DEPENDS ${hex_file} ${eeprom_image}
+      DEPENDS ${hex_file} ${eeprom_image} ${bin_file}
    )
 
    set_target_properties(
@@ -433,7 +443,7 @@ add_definitions("-Wall")
 add_definitions("-Werror")
 #add_definitions("-pedantic")
 add_definitions("-pedantic-errors")
-add_definitions("-funsigned-char")
+#add_definitions("-funsigned-char")
 add_definitions("-funsigned-bitfields")
 add_definitions("-ffunction-sections")
 add_definitions("-c")
