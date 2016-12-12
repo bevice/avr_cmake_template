@@ -1,6 +1,6 @@
 #include "main.h"
 
-void setup(void) {
+void setup() {
 
 }
 
