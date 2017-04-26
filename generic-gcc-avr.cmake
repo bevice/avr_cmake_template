@@ -33,6 +33,7 @@
 ##########################################################################
 option(WITH_MCU "Add the mCU type to the target file name." ON)
 option(CXX_NO_THREAD_SAFE_STATICS "Don't use fread save statics in C++" ON)
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release;MinSizeRel" CACHE STRING "" FORCE)
 
 SET(CMAKE_SYSTEM_NAME Generic)
 SET(CMAKE_SYSTEM_PROCESSOR avr)
